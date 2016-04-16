@@ -1,0 +1,31 @@
+<ul id="list"></ul>
+
+<script>
+  function getHashes() {
+    var hashes = {};
+    var temp,
+    reg = /([^&;=]+)=?([^&;]*)/g,
+    query = window.location.hash.substring(1)
+    data = function (str) { return decodeURIComponent(str.replace(/\+/g, " ")); };
+
+    while (temp = reg.exec(query)) {
+      hashes[data(temp[1])] = data(temp[2]);
+    }
+
+    return hashes;
+  }
+
+  // get the hashes from URL
+  var hashes = getHashes()
+
+  // all your values are in the hashes variable
+  console.log(hashes);
+
+  // display the data
+  var ul = document.getElementById('list');
+  for (hash in hashes) {
+    var li = document.createElement('li');
+    li.innerHTML = hash + ' : ' + hashes[hash];
+    ul.appendChild(li);
+  }
+</script>
